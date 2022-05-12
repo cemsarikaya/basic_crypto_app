@@ -7,26 +7,21 @@ abstract class ICryptoService {
   ICryptoService(this.dio);
   final Dio dio;
 
-  Future<CryptoModel?> fetchResourceItem();
+  Future<List<CryptoModel>?> fetchResourceItem();
 }
 
 class CryptoService extends ICryptoService {
   CryptoService(Dio dio) : super(dio);
 
   @override
-  Future<CryptoModel?> fetchResourceItem() async {
-    final response = await dio.get('/markets', queryParameters: {
-      'vs_currency': 'usd',
-      'order': 'market_cap_desc',
-      'per_page': '25',
-      'page': '1',
-      'sparkline': 'false'
-    });
+  Future<List<CryptoModel>?> fetchResourceItem() async {
+    final response = await dio.get('/coins/markets',
+        queryParameters: {'vs_currency': 'usd', 'per_page': '100', 'page': '1', 'sparkline': 'false'});
 
     if (response.statusCode == HttpStatus.ok) {
       final jsonBody = response.data;
-      if (jsonBody is Map<String, dynamic>) {
-        return CryptoModel.fromJson(jsonBody);
+      if (jsonBody is List) {
+        return jsonBody.map((e) => CryptoModel.fromJson(e)).toList();
       }
     }
     return null;
