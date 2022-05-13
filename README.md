@@ -2,6 +2,10 @@
 
 A new Flutter project.
 
+# screen views
+
+<img src = "https://github.com/cemsarikaya/basic_crypto_app/blob/master/lib/assets/images/1.png" width="250"> <img src = "https://github.com/cemsarikaya/basic_crypto_app/blob/master/lib/assets/images/2.png" width="250">
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
